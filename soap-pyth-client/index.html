@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Profesores</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body onload="cargarProfesores()">
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Gestión de Profesores</h1>
+
+   
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <h4>Registrar Profesor</h4>
+      </div>
+      <div class="card-body">
+        <form id="formRegistrar" onsubmit="return validarFormulario(event)">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" class="form-control" placeholder="Ingrese el nombre" required pattern="[A-Za-záéíóúÁÉÍÓÚ]+">
+            <small class="form-text text-muted">Solo letras</small>
+          </div>
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" id="apellido" class="form-control" placeholder="Ingrese el apellido" required pattern="[A-Za-záéíóúÁÉÍÓÚ]+">
+            <small class="form-text text-muted">Solo letras</small>
+          </div>
+          <div class="mb-3">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" id="dni" class="form-control" placeholder="Ingrese el DNI" required pattern="^\d{8}$">
+            <small class="form-text text-muted">Solo 8 dígitos numéricos</small>
+          </div>
+          <div class="mb-3">
+            <label for="materia" class="form-label">Materia</label>
+            <input type="text" id="materia" class="form-control" placeholder="Ingrese la materia" required pattern="[A-Za-záéíóúÁÉÍÓÚ]+">
+            <small class="form-text text-muted">Solo letras</small>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Registrar</button>
+        </form>
+      </div>
+    </div>
+
+    
+    <div class="text-center mb-4">
+      <button class="btn btn-primary" onclick="cargarProfesores()">Cargar Profesores</button>
+    </div>
+    
+   
+    <div class="card">
+      <div class="card-header bg-secondary text-white">
+        <h4>Lista de Profesores</h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>DNI</th>
+              <th>Materia</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="listaProfesores">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <div class="card mb-4" id="formularioActualizar" style="display:none;">
+      <div class="card-header bg-warning text-white">
+        <h4>Actualizar Profesor</h4>
+      </div>
+      <div class="card-body">
+        <form id="formActualizar">
+          <div class="mb-3">
+            <label for="nombreActualizar" class="form-label">Nombre</label>
+            <input type="text" id="nombreActualizar" class="form-control" placeholder="Ingrese el nombre" required pattern="[A-Za-záéíóúÁÉÍÓÚ]+">
+          </div>
+          <div class="mb-3">
+            <label for="apellidoActualizar" class="form-label">Apellido</label>
+            <input type="text" id="apellidoActualizar" class="form-control" placeholder="Ingrese el apellido" required pattern="[A-Za-záéíóúÁÉÍÓÚ]+">
+          </div>
+          <div class="mb-3">
+            <label for="dniActualizar" class="form-label">DNI</label>
+            <input type="text" id="dniActualizar" class="form-control" placeholder="Ingrese el DNI" required disabled>
+          </div>
+          <div class="mb-3">
+            <label for="materiaActualizar" class="form-label">Materia</label>
+            <input type="text" id="materiaActualizar" class="form-control" placeholder="Ingrese la materia" required pattern="[A-Za-záéíóúÁÉÍÓÚ]+">
+          </div>
+          <button type="submit" class="btn btn-warning w-100">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <script src="index.js"></script>
+
+  <script>
+    function validarFormulario(event) {
+      var nombre = document.getElementById('nombre');
+      var apellido = document.getElementById('apellido');
+      var dni = document.getElementById('dni');
+      var materia = document.getElementById('materia');
+
+      if (!nombre.value.match(/^[A-Za-záéíóúÁÉÍÓÚ]+$/)) {
+        alert("El nombre solo puede contener letras.");
+        event.preventDefault();
+        return false;
+      }
+
+      if (!apellido.value.match(/^[A-Za-záéíóúÁÉÍÓÚ]+$/)) {
+        alert("El apellido solo puede contener letras.");
+        event.preventDefault();
+        return false;
+      }
+
+      if (!dni.value.match(/^\d{8}$/)) {
+        alert("El DNI debe ser un número de 8 dígitos.");
+        event.preventDefault();
+        return false;
+      }
+
+      if (!materia.value.match(/^[A-Za-záéíóúÁÉÍÓÚ]+$/)) {
+        alert("La materia solo puede contener letras.");
+        event.preventDefault();
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+  
+</body>
+</html>
